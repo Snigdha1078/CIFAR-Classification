@@ -5,3 +5,4 @@
 .Rproj.user/
 .DS_Storedesktop.ini
 /data/raw
+__pycache__/
