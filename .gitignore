@@ -4,5 +4,5 @@
 .Ruserdata
 .Rproj.user/
 .DS_Storedesktop.ini
-/data/raw
+/data/*
 __pycache__/
