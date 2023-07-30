@@ -1,3 +1,4 @@
+import numpy as np
 import torch
 import torch.nn as nn
 import torch.optim as optim
@@ -18,9 +19,14 @@ optimizer = optim.SGD(net.parameters(), lr=0.001, momentum=0.9)
 
 def main():
     # Train the network
-    for epoch in range(30):  # loop over the dataset multiple times
+    train_losses = []
+    train_accuracy = []
 
+    for epoch in range(30):  # loop over the dataset multiple times
         running_loss = 0.0
+        correct = 0
+        total = 0
+
         for i, data in enumerate(trainloader, 0):
             # get the inputs; data is a list of [inputs, labels]
             inputs, labels = data
@@ -36,15 +42,22 @@ def main():
 
             # print statistics
             running_loss += loss.item()
-            if i % 2000 == 1999:    # print every 2000 mini-batches
-                print('[%d, %5d] loss: %.3f' %
-                      (epoch + 1, i + 1, running_loss / 2000))
-                running_loss = 0.0
+
+            _, predicted = outputs.max(1)
+            total += labels.size(0)
+            correct += predicted.eq(labels).sum().item()
+
+        train_losses.append(running_loss / len(trainloader))
+        train_accuracy.append(100. * correct / total)
 
     print('Finished Training')
 
     # Save the trained model
     torch.save(net.state_dict(), './codes/models/deer_truck_net.pth')
+
+    # Save training loss and accuracy
+    np.save('./data/interim/train_losses.npy', np.array(train_losses))
+    np.save('./data/interim/train_accuracy.npy', np.array(train_accuracy))
 
 # This will ensure that the script runs correctly when we execute it directly
 if __name__ == '__main__':
