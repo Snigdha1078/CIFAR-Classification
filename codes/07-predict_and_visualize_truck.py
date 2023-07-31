@@ -2,13 +2,15 @@ import numpy as np
 import torch
 from torchvision.utils import make_grid
 import matplotlib.pyplot as plt
-from models.cnn_model import Net
 from PIL import Image
+import sys
 import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+from models.cnn_model import Net
 
 # Load the model
 net = Net()
-net.load_state_dict(torch.load('./codes/models/deer_truck_net.pth'))
+net.load_state_dict(torch.load('./models/deer_truck_net.pth'))
 
 # Load the test data
 testloader = torch.load('./data/interim/testloader.pt')

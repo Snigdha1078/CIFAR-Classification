@@ -3,6 +3,10 @@ import torch
 import torch.nn as nn
 import torch.optim as optim
 from torch.utils.data import random_split
+import sys
+import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
 
 # Load the training data
 trainloader = torch.load('./data/interim/trainloader.pt')
@@ -91,7 +95,7 @@ def main():
     print('Finished Training')
 
     # Save the trained model
-    torch.save(net.state_dict(), './codes/models/deer_truck_net.pth')
+    torch.save(net.state_dict(), './models/deer_truck_net.pth')
 
     # Save training and validation loss and accuracy
     np.save('./data/interim/train_losses.npy', np.array(train_losses))
