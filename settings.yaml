@@ -1,4 +1,4 @@
-project_name : test
+project_name : datarock-programming-test
 dvc_folders: data outputs
 dvc_remote : s3://applied-science-dvc/test
-git_remote:
+git_remote: https://github.com/Snigdha1078/datarock-programming-test.git

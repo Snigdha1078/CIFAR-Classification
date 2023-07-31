@@ -1,42 +1,63 @@
-![Datarock](assets/datarock_logo_2_rect.jpeg)
+# Datarock Programming Assessment
+
+[![python](https://img.shields.io/badge/Python-3.10-3776AB.svg?style=flat&logo=python&logoColor=white)](https://www.python.org)
 
 
-# Programming Test for Recruiting:
+In this project, we will design and train a Convolutional Neural Network (CNN) to classify images from the CIFAR10 dataset into two classes: deer and truck. The CIFAR10 dataset consists of 60,000 32x32 color images in 10 classes, with 6,000 images per class. Our objective is to build an accurate image classifier for the specific classes 'deer' and 'truck.'
 
-The primary objective of this programming test is to assess the problem-solving and programming abilities of the applicants. By presenting them with an uncommon coding problem, the test aims to gauge the applicants proficiency in devising a solution to a real-world challenge. The assessment strives to select individuals who demonstrate a solid foundation in problem-solving and programming, ensuring they are well-equipped to contribute effectively to the organization's technical endeavors.
+## Environement Setup
+Python 3.8 or higher is required for running this code.
 
-## Design and Train a Deep Learning Model on a Subset of CIFAR10
+### Dependencies Installation
+1. Install the required packages using 'pip'
+```bash
+     pip install torch torchvision numpy matplotlib
+```
 
-For the following programming test, we will use the CIFAR10 dataset. You can read about this dataset and download it from [here](https://www.cs.toronto.edu/~kriz/cifar.html).
+OR
 
-Follow the instructions below to write your program. Please write your program using ***Pytorch***. Upload your code to your GitHub repository using this template and send us the link to your repository. Please make sure your repository is public. 
+2. Install the required packages using requirements.txt
+```bash
+     pip install -r requirements.txt
+```
 
-1. Download the CIFAR10 dataset.
-2. Write a code that takes images with labels *deer* and *truck* from the training and test subsets of CIFAR10 dataset.  
-3. Design a Convolutional Neural Network (CNN) with four convolutional layers and two fully connected layers that outputs two probabilities. One for class *deer* and one for class *truck*.
-4. Train your CNN on the images labeled *deer* and *truck* for 30 epochs.
-5. Plot the training loss/accuracy and validation loss/accuracy of the model per epoch during training.
-6. Plot two images labeled *deer* that the model predicts correctly and two images labeled *deer* that the model predicts wrongly.
-7. Plot two images labeled *truck* that the model predicts correctly and two images labeled *truck* that the model predicts wrongly.
+### How to Run the code
+To execute each Python file, open a terminal or command prompt and run the following commands in the order:
 
-***IMPORTANT: Your code should be able to run directly on the CIFAR10 dataset files provided at the above link.*** 
+1. For Downloading the CIFAR data 
+```bash
+     python codes/01-data_preparation.py
+```
+2. To extract images with labels deer and truck from the training and test subsets of CIFAR10 dataset
+```bash
+     python codes/02-preprocessing.py
+```
+3. To Design a CNN model with 4 convolutional layers and 2 fully connected layers
+```bash
+     python codes/models/cnn_model.py
+```
+4. To train the CNN model for 30 epochs
+```bash
+     python codes/04-train_model.py
+```
+5. To Plot the training loss/accuracy and validation loss/accuracy of the model per epoch during training
+```bash
+     python codes/05-plot_metrics.py
+```
+6. To plot two images labeled deer that the model predicts correctly and two images labeled deer that the model predicts wrongly
+```bash
+     python codes/06-predict_and_visualize_deer.py
+```
+7. To plot two images labeled truck that the model predicts correctly and two images labeled truck that the model predicts wrongly
+```bash
+     python codes/07-predict_and_visualize_truck.py
+```
 
-## Outputs
+### Outputs
+The 'outputs' directory will contain the following files:
 
-The following files should be provided:
-
-1. A file/files (in .py or .ipynb format) containing the code that does all the steps listed above.
-2. A plot that shows the training loss/accuracy of the model. 
-3. A plot that shows the validation loss/accruacy of the model. 
-4. A plot that shows two images with labels *deer* that the model predicts correctly and two images with labels *deer* that the model predicts incorrectly. 
-5. A plot that shows two images with labels *truck* that the model predicts correctly and two images with labels *truck* that the model predicts incorrectly.
-
-
-## Environments
-
-Please provide Information about how to setup the environment to be able to run your code. 
-
-
-## Outputs 
-
-Please provide information about where the requested outputs are located and in what order the code should be run. 
+- subplots.png: Plot showing the training loss/accuracy and validation loss/accuracy per epoch.
+- correct_deer.png: Images of two correctly predicted 'deer' samples.
+- incorrect_deer.png: Images of two incorrectly predicted 'deer' samples.
+- correct_truck.png: Images of two correctly predicted 'truck' samples.
+- incorrect_truck.png: Images of two incorrectly predicted 'truck' samples.
