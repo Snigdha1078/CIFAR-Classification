@@ -3,6 +3,8 @@ import torch
 from torchvision.utils import make_grid
 import matplotlib.pyplot as plt
 from models.cnn_model import Net
+from PIL import Image
+import os
 
 # Load the model
 net = Net()
@@ -19,11 +21,8 @@ images, labels = next(dataiter)
 outputs = net(images)
 _, predicted = torch.max(outputs, 1)
 
-# Function for plotting images
-from PIL import Image
-
-# Function for plotting images
-def imshow(img, title):
+# Function for plotting and saving images
+def imshow_and_save(img, title, save_path):
     img = img / 2 + 0.5     # unnormalize
     npimg = img.numpy()
     npimg = np.transpose(npimg, (1, 2, 0))
@@ -36,7 +35,12 @@ def imshow(img, title):
     
     plt.imshow(pil_img)
     plt.title(title)
+    plt.savefig(save_path,bbox_inches='tight')  # Save the image to the specified path
     plt.show()
+
+# Create the "Output" folder if it doesn't exist
+output_folder = './Outputs'
+os.makedirs(output_folder, exist_ok=True)
 
 # Get class names
 classes = ('deer', 'truck')
@@ -45,12 +49,12 @@ classes = ('deer', 'truck')
 correct_truck_indices = (labels == predicted) & (labels == 1)
 incorrect_truck_indices = (labels != predicted) & (labels == 1)
 
-# Plot two images labeled 'truck' that the model predicts correctly
+# Plot and save two images labeled 'truck' that the model predicts correctly
 correct_truck_images = images[correct_truck_indices][:2]
 correct_truck_labels = predicted[correct_truck_indices][:2]
-imshow(make_grid(correct_truck_images), ' '.join('%5s' % classes[correct_truck_labels[j]] for j in range(2)))
+imshow_and_save(make_grid(correct_truck_images), ' '.join('%5s' % classes[correct_truck_labels[j]] for j in range(2)), './Outputs/correct_truck.png')
 
-# Plot two images labeled 'truck' that the model predicts incorrectly
+# Plot and save two images labeled 'truck' that the model predicts incorrectly
 incorrect_truck_images = images[incorrect_truck_indices][:2]
 incorrect_truck_labels = predicted[incorrect_truck_indices][:2]
-imshow(make_grid(incorrect_truck_images), ' '.join('%5s' % classes[incorrect_truck_labels[j]] for j in range(2)))
+imshow_and_save(make_grid(incorrect_truck_images), ' '.join('%5s' % classes[incorrect_truck_labels[j]] for j in range(2)), './Outputs/incorrect_truck.png')
