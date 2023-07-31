@@ -6,3 +6,6 @@
 .DS_Storedesktop.ini
 /data/*
 __pycache__/
+.vscode
+Outputs/*
+models/deer_truck_net.pth
