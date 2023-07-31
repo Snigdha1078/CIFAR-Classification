@@ -1,5 +1,6 @@
 import torch
 import numpy as np
+import os
 from torchvision.datasets import CIFAR10
 from torchvision.transforms import ToTensor
 from torch.utils.data import TensorDataset, DataLoader
@@ -40,6 +41,10 @@ trainset = TensorDataset(train_data, train_targets)
 testset = TensorDataset(test_data, test_targets)
 trainloader = DataLoader(trainset, batch_size=64, shuffle=True)
 testloader = DataLoader(testset, batch_size=64, shuffle=False)
+
+# Create the "interim" folder if it doesn't exist
+output_folder = './data/interim'
+os.makedirs(output_folder, exist_ok=True)
 
 # Save the DataLoaders to be used in the training script
 torch.save(trainloader, './data/interim/trainloader.pt')
