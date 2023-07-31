@@ -1,4 +1,8 @@
 # Datarock Programming Assessment
+
+[![python](https://img.shields.io/badge/Python-3.10-3776AB.svg?style=flat&logo=python&logoColor=white)](https://www.python.org)
+
+
 In this project, we will design and train a Convolutional Neural Network (CNN) to classify images from the CIFAR10 dataset into two classes: deer and truck. The CIFAR10 dataset consists of 60,000 32x32 color images in 10 classes, with 6,000 images per class. Our objective is to build an accurate image classifier for the specific classes 'deer' and 'truck.'
 
 ## Environement Setup
@@ -6,12 +10,16 @@ Python 3.8 or higher is required for running this code.
 
 ### Dependencies Installation
 1. Install the required packages using 'pip'
-``pip install torch torchvision numpy matplotlib``
+```bash
+     pip install torch torchvision numpy matplotlib
+```
 
-     OR
+OR
 
 2. Install the required packages using requirements.txt
-```pip install -r requirements.txt```
+```bash
+     pip install -r requirements.txt
+```
 
 ### How to Run the code
 To execute each Python file, open a terminal or command prompt and run the following commands in the order:
