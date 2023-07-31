@@ -3,6 +3,8 @@ import torch
 from torchvision.utils import make_grid
 import matplotlib.pyplot as plt
 from models.cnn_model import Net
+from PIL import Image
+import os
 
 # Load the model
 net = Net()
@@ -19,11 +21,8 @@ images, labels = next(dataiter)
 outputs = net(images)
 _, predicted = torch.max(outputs, 1)
 
-# Function for plotting images
-from PIL import Image
-
-# Function for plotting images
-def imshow(img, title):
+# Function for plotting and saving images
+def imshow_and_save(img, title, save_path):
     img = img / 2 + 0.5     # unnormalize
     npimg = img.numpy()
     npimg = np.transpose(npimg, (1, 2, 0))
@@ -36,7 +35,12 @@ def imshow(img, title):
     
     plt.imshow(pil_img)
     plt.title(title)
+    plt.savefig(save_path,bbox_inches='tight')  # Save the image to the specified path
     plt.show()
+
+# Create the "Output" folder if it doesn't exist
+output_folder = './Outputs'
+os.makedirs(output_folder, exist_ok=True)
 
 # Get class names
 classes = ('deer', 'truck')
@@ -45,12 +49,12 @@ classes = ('deer', 'truck')
 correct_deer_indices = (labels == predicted) & (labels == 0)
 incorrect_deer_indices = (labels != predicted) & (labels == 0)
 
-# Plot two images labeled 'deer' that the model predicts correctly
+# Plot and save two images labeled 'deer' that the model predicts correctly
 correct_deer_images = images[correct_deer_indices][:2]
 correct_deer_labels = predicted[correct_deer_indices][:2]
-imshow(make_grid(correct_deer_images), ' '.join('%5s' % classes[correct_deer_labels[j]] for j in range(2)))
+imshow_and_save(make_grid(correct_deer_images), ' '.join('%5s' % classes[correct_deer_labels[j]] for j in range(2)), './Outputs/correct_deer.png')
 
-# Plot two images labeled 'deer' that the model predicts incorrectly
+# Plot and save two images labeled 'deer' that the model predicts incorrectly
 incorrect_deer_images = images[incorrect_deer_indices][:2]
 incorrect_deer_labels = predicted[incorrect_deer_indices][:2]
-imshow(make_grid(incorrect_deer_images), ' '.join('%5s' % classes[incorrect_deer_labels[j]] for j in range(2)))
+imshow_and_save(make_grid(incorrect_deer_images), ' '.join('%5s' % classes[incorrect_deer_labels[j]] for j in range(2)), './Outputs/incorrect_deer.png')
