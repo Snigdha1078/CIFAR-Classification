@@ -34,7 +34,7 @@ To execute each Python file, open a terminal or command prompt and run the follo
 ```
 3. To Design a CNN model with 4 convolutional layers and 2 fully connected layers
 ```bash
-     python codes/models/cnn_model.py
+     python models/cnn_model.py
 ```
 4. To train the CNN model for 30 epochs
 ```bash
